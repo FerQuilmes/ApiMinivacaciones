@@ -7,6 +7,9 @@ const app = express();
 const ageGate = require("./routes/ageGate");
 const form = require("./routes/form");
 
+//Setings PORT
+app.set('port', process.env.PORT || 3001);
+
 // Enable CORS
 app.use(
   cors({
@@ -32,9 +35,8 @@ app.use(express.json());
 app.use("/ageGate", ageGate);
 app.use("/form", form);
 
-const PORT = process.env.PORT || 3001;
-const server = app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const server = app.listen(app.get('port'), () => {
+  console.log(`Server running on port ${app.get('port')}`);
 });
 
 module.exports = { app, server };
