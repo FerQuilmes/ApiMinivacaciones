@@ -14,7 +14,7 @@ app.set('port', process.env.PORT || 3001);
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://wapocazure2-dev.azurewebsites.net/"],
     allowedHeaders:
       "Origin, X-Requested-With, Content-Type, X-Auth-Token, X-PINGOTHER, Accept",
     methods: "GET,HEAD,PUT,PATCH,OPTIONS,POST,DELETE",
