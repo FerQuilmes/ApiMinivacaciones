@@ -1,11 +1,20 @@
 const express = require("express");
+require('dotenv').config({ path: "./.env" })
 const cors = require("cors");
-
-//configuraciones
-// require('./db')
-const app = express();
+const { db } = require('./db')
 const ageGate = require("./routes/ageGate");
 const form = require("./routes/form");
+
+//configuraciones
+const app = express();
+db.connect(function (err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  
+  console.log('connected to DB minivacaciones');
+})
 
 //Setings PORT
 app.set('port', process.env.PORT || 3001);
