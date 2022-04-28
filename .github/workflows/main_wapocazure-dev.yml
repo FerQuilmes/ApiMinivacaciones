@@ -12,11 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env: 
-        DATABASE: ${{ secrets.DATABASE }}
-        DATABASE_USER: ${{ secrets.DATABASE_USER }}
-        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-        DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
 
     steps:
       - uses: actions/checkout@v2
@@ -25,6 +20,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_DATABASE: ${{ secrets.DATABASE }}
+          envkey_DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          envkey_DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          envkey_DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
 
       - name: npm install, build, and test
         run: |
