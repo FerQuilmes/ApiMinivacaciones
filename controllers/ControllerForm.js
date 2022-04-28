@@ -37,7 +37,7 @@ exports.addForm = (req, res) => {
     },
     (err, resultado) => {
       console.log(err);
-      if (err) return res.status(400).send('Hubo un error al crear el Form');
+      if (err) return res.status(400).send(`Hubo un error al crear el Form: ${err}`);
       if (resultado)
         return res.status(200).json({
           success: true,
