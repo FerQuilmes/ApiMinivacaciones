@@ -9,6 +9,8 @@ const form = require("./routes/form");
 const app = express();
 db.connect(function (err) {
   if (err) {
+    console.log("error DB.. enviroment")
+    console.log(process.env.DATABASE_HOST,process.env.DATABASE_USER,process.env.DATABASE_PASSWORD,process.env.DATABASE)
     console.error('error connecting: ' + err.stack);
     return;
   }
