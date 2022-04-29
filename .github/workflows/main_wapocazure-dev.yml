@@ -8,6 +8,12 @@ on:
     branches:
       - main
   workflow_dispatch:
+  
+env:
+  DATABASE: ${{ secrets.DATABASE }}
+  DATABASE_USER: ${{ secrets.DATABASE_USER }} 
+  DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }} 
+  DATABASE_HOST: ${{ secrets.DATABASE_HOST }} 
 
 jobs:
   build:
@@ -27,14 +33,6 @@ jobs:
           npm run build --if-present
           npm run test --if-present
           
-      - name: Create .env file
-        run: |
-          touch .env
-          echo DATABASE: ${{ secrets.DATABASE }} >> .env
-          echo DATABASE_USER: ${{ secrets.DATABASE_USER }} >> .env
-          echo DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }} >> .env
-          echo DATABASE_HOST: ${{ secrets.DATABASE_HOST }} >> .env
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
